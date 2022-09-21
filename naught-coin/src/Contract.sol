@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 
@@ -37,3 +37,16 @@ import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
     }
   } 
 } 
+
+contract Transferer {
+
+    IERC20 token;
+
+    constructor(address tokenAddress) public {
+        token = IERC20(tokenAddress);
+    }
+
+    function transferFrom(address from, address to, uint amount) public {
+        token.transferFrom(from, to, amount);
+    }
+}

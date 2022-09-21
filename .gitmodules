@@ -13,3 +13,9 @@
 [submodule "re-entrancy/lib/openzeppelin-contracts"]
 	path = re-entrancy/lib/openzeppelin-contracts
 	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "naught-coin/lib/forge-std"]
+	path = naught-coin/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "naught-coin/lib/openzeppelin-contracts"]
+	path = naught-coin/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts

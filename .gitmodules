@@ -19,3 +19,6 @@
 [submodule "naught-coin/lib/openzeppelin-contracts"]
 	path = naught-coin/lib/openzeppelin-contracts
 	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "adult-eth/lib/forge-std"]
+	path = adult-eth/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
